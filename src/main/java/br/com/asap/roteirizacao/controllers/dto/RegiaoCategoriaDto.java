@@ -1,51 +1,44 @@
 package br.com.asap.roteirizacao.controllers.dto;
 
+import java.io.Serializable;
+import java.util.List;
+
 import br.com.asap.roteirizacao.entities.Categoria;
 import br.com.asap.roteirizacao.entities.Regiao;
-import br.com.asap.roteirizacao.entities.RegiaoCategoria;
 
-public class RegiaoCategoriaDto {
+public class RegiaoCategoriaDto implements Serializable {
 
-	private Regiao codigoRegiao;
-	private Categoria codigoCategoria;
+	private static final long serialVersionUID = 1L;
+
+	private Regiao regiao;
+	private Categoria categoria;
 
 	public RegiaoCategoriaDto() {
 	}
 
-	public RegiaoCategoriaDto(Regiao codigoRegiao, Categoria codigoCategoria) {
-		this.codigoRegiao = codigoRegiao;
-		this.codigoCategoria = codigoCategoria;
+	public RegiaoCategoriaDto(Regiao regiao, Categoria categoria) {
+		this.regiao = regiao;
+		this.categoria = categoria;
 	}
 
-	public RegiaoCategoriaDto(RegiaoCategoria regiaoCategoria) {
-		codigoRegiao = regiaoCategoria.getCodigoRegiao();
-		codigoCategoria = regiaoCategoria.getCodigoCategoria();
+	public RegiaoCategoriaDto(RegiaoDto regiaoDto, List<RegiaoCategoriaDto> regiaoCategoriaDto) {
+		regiaoDto.setCodigo(regiao.getCodigo());
 	}
 
-	public Regiao getCodigoRegiao() {
-		return codigoRegiao;
+	public Regiao getRegiao() {
+		return regiao;
 	}
 
-	public void setCodigoRegiao(Regiao codigoRegiao) {
-		this.codigoRegiao = codigoRegiao;
+	public void setRegiao(Regiao regiao) {
+		this.regiao = regiao;
 	}
 
-	public Categoria getCodigoCategoria() {
-		return codigoCategoria;
+	public Categoria getCategoria() {
+		return categoria;
 	}
 
-	public void setCodigoCategoria(Categoria codigoCategoria) {
-		this.codigoCategoria = codigoCategoria;
-	}
-
-	public static RegiaoCategoriaDto toDto(RegiaoCategoria regiaoCategoria) {
-		RegiaoCategoriaDto regiaoCategoriaDto = new RegiaoCategoriaDto(regiaoCategoria);
-		return regiaoCategoriaDto;
-	}
-
-	public RegiaoCategoria toEntity() {
-		RegiaoCategoria regiaoCategoria = new RegiaoCategoria(this.codigoRegiao, this.codigoCategoria);
-		return regiaoCategoria;
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 }

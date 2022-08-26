@@ -15,10 +15,12 @@ INSERT INTO tb_sku(codigo, descricao, codigo_categoria, codigo_tipo_transporte) 
 INSERT INTO tb_sku(codigo, descricao, codigo_categoria, codigo_tipo_transporte) VALUES(7, 'L/S 10,2K SAMSUNG WD10J6410AXFAZ 220V INX', 3, 2);
 INSERT INTO tb_sku(codigo, descricao, codigo_categoria, codigo_tipo_transporte) VALUES(8, 'LAVA E SECA 9KG WD90J6410 IN 127V SAMSUNG', 3, 2);
 
-INSERT INTO tb_filial(cnpj, descricao) VALUES('12345678000110', 'Jundiai');
-INSERT INTO tb_filial(cnpj, descricao) VALUES('12345678000120', 'Camaçari');
-INSERT INTO tb_filial(cnpj, descricao) VALUES('12345678000130', 'Betim');
-INSERT INTO tb_filial(cnpj, descricao) VALUES('12345678000140', 'Curitiba');
+INSERT INTO tb_filial(cnpj, descricao) VALUES('1', 'Jundiai');
+INSERT INTO tb_filial(cnpj, descricao) VALUES('2', 'Camaçari');
+INSERT INTO tb_filial(cnpj, descricao) VALUES('3', 'Betim');
+INSERT INTO tb_filial(cnpj, descricao) VALUES('4', 'São Bernardo do Campo');
+INSERT INTO tb_filial(cnpj, descricao) VALUES('5', 'Ribeirao Preto');
+INSERT INTO tb_filial(cnpj, descricao) VALUES('6', 'Duque de Caxias');
 
 INSERT INTO tb_regiao(codigo, descricao, status) VALUES(1, 'Centro São Paulo', 'ATIVO');
 INSERT INTO tb_regiao(codigo, descricao, status) VALUES(2, 'Zona Norte São Paulo', 'INATIVO');
@@ -31,6 +33,6 @@ INSERT INTO tb_faixas_cep(codigo, codigo_Regiao, cep_Inicial, cep_Final) VALUES 
 INSERT INTO tb_faixas_cep(codigo, codigo_Regiao, cep_Inicial, cep_Final) VALUES (4, 3, 03000, 03999);
 INSERT INTO tb_faixas_cep(codigo, codigo_Regiao, cep_Inicial, cep_Final) VALUES (5, 4, 08000, 08499);
 
-INSERT INTO tb_regiao_categoria(codigo, codigo_regiao, codigo_categoria) VALUES(1, 1, 1);
-INSERT INTO tb_regiao_categoria(codigo, codigo_regiao, codigo_categoria) VALUES(2, 2, 2);
-INSERT INTO tb_regiao_categoria(codigo, codigo_regiao, codigo_categoria) VALUES(3, 2, 1);
+INSERT INTO tb_regiao_categoria(codigo_regiao, codigo_categoria) VALUES(1, 1);
+INSERT INTO tb_regiao_categoria(codigo_regiao, codigo_categoria) VALUES(2, 2);
+INSERT INTO tb_regiao_categoria(codigo_regiao, codigo_categoria) VALUES(2, 1);

@@ -30,7 +30,6 @@ public class Sku {
 	}
 
 	public Sku(Long codigo, String descricao, Categoria codigoCategoria, TipoTransporte codigoTipoTransporte) {
-		super();
 		this.codigo = codigo;
 		this.descricao = descricao;
 		this.codigoCategoria = codigoCategoria;

@@ -12,7 +12,7 @@ import javax.persistence.Table;
 public class RegiaoTipoTransporte implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@EmbeddedId
 	private RegiaoTipoTransportePK regiaoTipoTransportePK = new RegiaoTipoTransportePK();
 

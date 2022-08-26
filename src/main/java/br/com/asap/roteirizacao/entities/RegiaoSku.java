@@ -1,60 +1,56 @@
 package br.com.asap.roteirizacao.entities;
 
+import java.io.Serializable;
+import java.util.Objects;
+
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbRegiaoSku")
-public class RegiaoSku {
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
-	
-	@OneToOne
-	@JoinColumn(name = "codigoRegiao")
-	private Regiao codigoRegiao;
-	
-	@ManyToOne
-	@JoinColumn(name = "codigoSku")
-	private Sku codigoSku;
-	
+public class RegiaoSku implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	@EmbeddedId
+	private RegiaoSkuPk regiaoSkuPk = new RegiaoSkuPk();
+
 	public RegiaoSku() {
 	}
 
-	public RegiaoSku(Regiao codigoRegiao, Sku codigoSku) {
-		this.codigoRegiao = codigoRegiao;
-		this.codigoSku = codigoSku;
+	public RegiaoSku(RegiaoSkuPk regiaoSkuPk) {
+		this.regiaoSkuPk = regiaoSkuPk;
 	}
 
-	public Long getCodigo() {
-		return codigo;
+	public RegiaoSku(Regiao regiao, Sku sku) {
+		this.regiaoSkuPk.setRegiao(regiao);
+		this.regiaoSkuPk.setSku(sku);
 	}
 
-	public void setCodigo(Long codigo) {
-		this.codigo = codigo;
+	public RegiaoSkuPk getRegiaoSkuPk() {
+		return regiaoSkuPk;
 	}
 
-	public Regiao getCodigoRegiao() {
-		return codigoRegiao;
+	public void setRegiaoSkuPk(RegiaoSkuPk regiaoSkuPk) {
+		this.regiaoSkuPk = regiaoSkuPk;
 	}
 
-	public void setCodigoRegiao(Regiao codigoRegiao) {
-		this.codigoRegiao = codigoRegiao;
+	@Override
+	public int hashCode() {
+		return Objects.hash(regiaoSkuPk);
 	}
 
-	public Sku getCodigoSku() {
-		return codigoSku;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		RegiaoSku other = (RegiaoSku) obj;
+		return Objects.equals(regiaoSkuPk, other.regiaoSkuPk);
 	}
 
-	public void setCodigoSku(Sku codigoSku) {
-		this.codigoSku = codigoSku;
-	}
-	
 }

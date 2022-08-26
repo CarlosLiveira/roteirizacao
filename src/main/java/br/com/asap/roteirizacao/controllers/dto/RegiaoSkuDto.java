@@ -1,51 +1,36 @@
 package br.com.asap.roteirizacao.controllers.dto;
 
+import java.io.Serializable;
+import java.util.List;
+
 import br.com.asap.roteirizacao.entities.Regiao;
-import br.com.asap.roteirizacao.entities.RegiaoSku;
 import br.com.asap.roteirizacao.entities.Sku;
 
-public class RegiaoSkuDto {
-	
-	private Regiao codigoRegiao;
-	private Sku codigoSku;
-	
+public class RegiaoSkuDto implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
+	private Regiao regiao;
+	private Sku sku;
+
 	public RegiaoSkuDto() {
 	}
 
-	public RegiaoSkuDto(Regiao codigoRegiao, Sku codigoSku) {
-		this.codigoRegiao = codigoRegiao;
-		this.codigoSku = codigoSku;
-	}
-	
-	public RegiaoSkuDto(RegiaoSku regiaoSku) {
-		codigoRegiao = regiaoSku.getCodigoRegiao();
-		codigoSku = regiaoSku.getCodigoSku();
+	public RegiaoSkuDto(Regiao regiao, Sku sku) {
+		this.regiao = regiao;
+		this.sku = sku;
 	}
 
-	public Regiao getCodigoRegiao() {
-		return codigoRegiao;
+	public RegiaoSkuDto(RegiaoDto regiaoDto, List<RegiaoSkuDto> regiaoSkuDto) {
+		regiaoDto.setCodigo(regiao.getCodigo());
 	}
 
-	public void setCodigoRegiao(Regiao codigoRegiao) {
-		this.codigoRegiao = codigoRegiao;
+	public Regiao getRegiao() {
+		return regiao;
 	}
 
-	public Sku getCodigoSku() {
-		return codigoSku;
+	public Sku getSku() {
+		return sku;
 	}
 
-	public void setCodigoSku(Sku codigoSku) {
-		this.codigoSku = codigoSku;
-	}
-	
-	public static RegiaoSkuDto toDto(RegiaoSku regiaoSku) {
-		RegiaoSkuDto regiaoSkuDto = new RegiaoSkuDto(regiaoSku);
-		return regiaoSkuDto;
-	}
-	
-	public RegiaoSku toEntity() {
-		RegiaoSku regiaoSku = new RegiaoSku(this.codigoRegiao, this.codigoSku);
-		return regiaoSku;
-	}
-	
 }

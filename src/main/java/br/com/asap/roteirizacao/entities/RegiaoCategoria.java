@@ -1,65 +1,52 @@
 package br.com.asap.roteirizacao.entities;
 
+import java.io.Serializable;
+import java.util.Objects;
+
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "tbRegiaoCategoria")
-public class RegiaoCategoria {
+public class RegiaoCategoria implements Serializable {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
+	private static final long serialVersionUID = 1L;
 
-	@ManyToOne
-	@JoinColumn(name = "codigoRegiao")
-	private Regiao codigoRegiao;
-
-	@ManyToOne
-	@JoinColumn(name = "codigoCategoria")
-	private Categoria codigoCategoria;
+	@EmbeddedId
+	private RegiaoCategoriaPk regiaoCategoriaPk = new RegiaoCategoriaPk();
 
 	public RegiaoCategoria() {
 	}
 
-	public RegiaoCategoria(Long codigo, Regiao codigoRegiao, Categoria codigoCategoria) {
-		this.codigo = codigo;
-		this.codigoRegiao = codigoRegiao;
-		this.codigoCategoria = codigoCategoria;
+	public RegiaoCategoria(Regiao regiao, Categoria categoria) {
+		this.regiaoCategoriaPk.setRegiao(regiao);
+		this.regiaoCategoriaPk.setCategoria(categoria);
 	}
 
-	public RegiaoCategoria(Regiao codigoRegiao, Categoria codigoCategoria) {
-		this.codigoRegiao = codigoRegiao;
-		this.codigoCategoria = codigoCategoria;
+	public RegiaoCategoriaPk getRegiaoCategoriaPk() {
+		return regiaoCategoriaPk;
 	}
 
-	public Long getCodigo() {
-		return codigo;
+	public void setRegiaoCategoriaPk(RegiaoCategoriaPk regiaoCategoriaPk) {
+		this.regiaoCategoriaPk = regiaoCategoriaPk;
 	}
 
-	public void setCodigo(Long codigo) {
-		this.codigo = codigo;
+	@Override
+	public int hashCode() {
+		return Objects.hash(regiaoCategoriaPk);
 	}
 
-	public Regiao getCodigoRegiao() {
-		return codigoRegiao;
-	}
-
-	public void setCodigoRegiao(Regiao codigoRegiao) {
-		this.codigoRegiao = codigoRegiao;
-	}
-
-	public Categoria getCodigoCategoria() {
-		return codigoCategoria;
-	}
-
-	public void setCodigoCategoria(Categoria codigoCategoria) {
-		this.codigoCategoria = codigoCategoria;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		RegiaoCategoria other = (RegiaoCategoria) obj;
+		return Objects.equals(regiaoCategoriaPk, other.regiaoCategoriaPk);
 	}
 
 }

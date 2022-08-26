@@ -22,7 +22,6 @@ public class SkuDto {
 
 	public SkuDto(Long codigo, @NotNull @NotEmpty String descricao, Categoria codigoCategoria,
 			TipoTransporte codigoTipoTransporte) {
-		super();
 		this.codigo = codigo;
 		this.descricao = descricao;
 		this.codigoCategoria = codigoCategoria;

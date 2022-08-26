@@ -27,6 +27,7 @@ public class Regiao implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
 	private String descricao;
+
 	@Enumerated(value = EnumType.STRING)
 	private RegiaoStatus status;
 
@@ -38,19 +39,32 @@ public class Regiao implements Serializable {
 	@JoinColumn(name = "tipoTransporte")
 	private List<RegiaoTipoTransporte> regioesTiposTransporte = new ArrayList<>();
 
+	@OneToMany
+	@JoinColumn(name = "codigoCategoria")
+	private List<RegiaoCategoria> categorias = new ArrayList<RegiaoCategoria>();
+
+	@OneToMany
+	@JoinColumn(name = "sku")
+	private List<RegiaoSku> skus = new ArrayList<RegiaoSku>();
+
+	@OneToMany
+	@JoinColumn(name = "filial")
+	private List<RegiaoFilial> filiais = new ArrayList<RegiaoFilial>();
+
+	public Regiao() {
+	}
+
 	public Regiao(Long codigo, String descricao, RegiaoStatus status, List<FaixasCep> faixasCep,
-			List<RegiaoTipoTransporte> regioesTiposTransporte) {
+			List<RegiaoTipoTransporte> regioesTiposTransporte, List<RegiaoCategoria> categorias, List<RegiaoSku> skus,
+			List<RegiaoFilial> filiais) {
 		this.codigo = codigo;
 		this.descricao = descricao;
 		this.status = status;
 		this.faixasCep = faixasCep;
 		this.regioesTiposTransporte = regioesTiposTransporte;
-	}
-
-//	@OneToMany(mappedBy = "codigoCategoria")
-//	private List<RegiaoCategoria> categoria = new ArrayList<>();
-
-	public Regiao() {
+		this.categorias = categorias;
+		this.skus = skus;
+		this.filiais = filiais;
 	}
 
 	public Regiao(Long codigo, String descricao, RegiaoStatus status) {
@@ -99,6 +113,30 @@ public class Regiao implements Serializable {
 		this.regioesTiposTransporte = regioesTiposTransporte;
 	}
 
+	public List<RegiaoCategoria> getCategorias() {
+		return categorias;
+	}
+
+	public void setCategorias(List<RegiaoCategoria> categorias) {
+		this.categorias = categorias;
+	}
+
+	public List<RegiaoSku> getSkus() {
+		return skus;
+	}
+
+	public void setSkus(List<RegiaoSku> skus) {
+		this.skus = skus;
+	}
+
+	public List<RegiaoFilial> getFiliais() {
+		return filiais;
+	}
+
+	public void setFiliais(List<RegiaoFilial> filiais) {
+		this.filiais = filiais;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(codigo);
@@ -115,6 +153,5 @@ public class Regiao implements Serializable {
 		Regiao other = (Regiao) obj;
 		return Objects.equals(codigo, other.codigo);
 	}
-
 
 }

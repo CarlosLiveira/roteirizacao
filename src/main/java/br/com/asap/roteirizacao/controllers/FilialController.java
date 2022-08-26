@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -35,7 +36,7 @@ public class FilialController {
 	
 	@GetMapping(path = "/{cnpj}")
 	public ResponseEntity <FilialDto> listarPorCnpj(@PathVariable String cnpj){
-		return ResponseEntity.ok().body(filialService.listarPoCnpj(cnpj));
+		return ResponseEntity.ok().body(filialService.findById(cnpj));
 	}
 	
 	@PostMapping
@@ -56,6 +57,20 @@ public class FilialController {
 	public ResponseEntity<FilialDto> atualizar(@PathVariable String cnpj, @RequestBody @Valid FilialDto form) {
 		FilialDto filialDto = filialService.atualizar(cnpj, form);
 		return ResponseEntity.ok(filialDto);
+	}
+	
+	
+	
+	//Excluir com Request Param
+	@GetMapping(path = "/excluir")
+	public ResponseEntity <FilialDto> testeRequestParam(
+			@RequestParam(name = "regiao", defaultValue = "0") Integer codigoRegiao, 
+			@RequestParam(name = "categoria", defaultValue = "0") Integer codigoCategoria) {
+		System.out.println("--------------");
+		System.out.println(codigoRegiao);
+		
+		System.out.println(codigoCategoria);
+		return null;
 	}
 
 }

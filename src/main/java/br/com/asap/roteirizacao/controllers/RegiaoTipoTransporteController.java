@@ -3,12 +3,15 @@ package br.com.asap.roteirizacao.controllers;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -36,17 +39,13 @@ public class RegiaoTipoTransporteController {
 		return ResponseEntity.created(null).build();
 	}
 
-//	@PutMapping(value = "/{codigo}")
-//	public ResponseEntity<RegiaoTipoTransporteDto2> atualizar(@PathVariable Long codigo,
-//			@RequestBody @Valid RegiaoTipoTransporteDto2 form) {
-//		RegiaoTipoTransporteDto2 regiaoTipoTransporteDto2 = service.atualizar(codigo, form);
-//		return ResponseEntity.ok(regiaoTipoTransporteDto2);
-//	}
-
-//	@DeleteMapping(path = "/{codigo}") 
-//	public ResponseEntity<?> excluir(@PathVariable Long codigo){
-//		service.excluir(codigo);
-//		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-//	}
+	@DeleteMapping(path = "/excluir")
+	public ResponseEntity<?> excluir(
+			@RequestParam(name = "regiao", defaultValue = "0") Long codigoRegiao,
+			@RequestParam(name = "tipoTransporte", defaultValue = "0") Long codigoTipoTransporte) 
+	{
+		service.excluir(codigoRegiao, codigoTipoTransporte);
+		return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+	}
 
 }

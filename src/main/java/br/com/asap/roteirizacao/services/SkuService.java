@@ -27,7 +27,7 @@ public class SkuService {
 	}
 
 	@Transactional(readOnly = true)
-	public SkuDto listarPorCodigo(Long codigo) {
+	public SkuDto findById(Long codigo) {
 		Sku sku = skuRepository.findById(codigo)
 				.orElseThrow(() -> new EntityNotFoundException("Código inexistente " + codigo));
 		SkuDto skuDto = new SkuDto(sku);

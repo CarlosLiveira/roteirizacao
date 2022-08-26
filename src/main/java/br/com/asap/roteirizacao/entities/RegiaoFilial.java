@@ -1,12 +1,10 @@
-/*package br.com.asap.roteirizacao.entities;
+package br.com.asap.roteirizacao.entities;
 
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
@@ -15,60 +13,43 @@ public class RegiaoFilial implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long codigo;
-	
-	private Regiao regiao;
-	private String cnpj;
-	private String ordem;
+	@EmbeddedId
+	private RegiaoFilialPk regiaoFilialPk = new RegiaoFilialPk();
+
+	private Long ordem;
 
 	public RegiaoFilial() {
 	}
 
-	public RegiaoFilial(Long codigo, Regiao regiao, String cnpj, String ordem) {
-		super();
-		this.codigo = codigo;
-		this.regiao = regiao;
-		this.cnpj = cnpj;
+	public RegiaoFilial(Regiao regiao, Filial filial) {
+		this.regiaoFilialPk.setRegiao(regiao);
+		this.regiaoFilialPk.setFilial(filial);
+	}
+
+	public RegiaoFilial(RegiaoFilialPk regiaoFilialPk, Long ordem) {
+		this.regiaoFilialPk = regiaoFilialPk;
 		this.ordem = ordem;
 	}
 
-	public Long getCodigo() {
-		return codigo;
+	public RegiaoFilialPk getRegiaoFilialPk() {
+		return regiaoFilialPk;
 	}
 
-	public void setCodigo(Long codigo) {
-		this.codigo = codigo;
+	public void setRegiaoFilialPk(RegiaoFilialPk regiaoFilialPk) {
+		this.regiaoFilialPk = regiaoFilialPk;
 	}
 
-	public Regiao getRegiao() {
-		return regiao;
-	}
-
-	public void setRegiao(Regiao regiao) {
-		this.regiao = regiao;
-	}
-
-	public String getCnpj() {
-		return cnpj;
-	}
-
-	public void setCnpj(String cnpj) {
-		this.cnpj = cnpj;
-	}
-
-	public String getOrdem() {
+	public Long getOrdem() {
 		return ordem;
 	}
 
-	public void setOrdem(String ordem) {
+	public void setOrdem(Long ordem) {
 		this.ordem = ordem;
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(codigo);
+		return Objects.hash(regiaoFilialPk);
 	}
 
 	@Override
@@ -80,8 +61,7 @@ public class RegiaoFilial implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		RegiaoFilial other = (RegiaoFilial) obj;
-		return Objects.equals(codigo, other.codigo);
+		return Objects.equals(regiaoFilialPk, other.regiaoFilialPk);
 	}
 
 }
-*/

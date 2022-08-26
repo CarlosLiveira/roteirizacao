@@ -28,7 +28,7 @@ public class RegiaoTipoTransporteService {
 
 	@Autowired
 	private TipoTransporteService tipoTransporteService;
-	
+
 	@Transactional
 	public RegiaoTipoTransporteDtoOutput listarPorCodigoRegiao(Long codigo) {
 		RegiaoDto regiaoDto = regiaoService.findById(codigo);
@@ -37,26 +37,6 @@ public class RegiaoTipoTransporteService {
 				.map(obj -> obj.getRegiaoTipoTransportePK().getTipoTransporte()).collect(Collectors.toList());
 		return new RegiaoTipoTransporteDtoOutput(regiaoDto, tiposTransporte);
 	}
-
-//	@Transactional
-//	public TiposTransporteDaRegiaoDto listarPorCodigoRegiao(Long codigo) {
-//		RegiaoDto regiaoDto = regiaoService.findById2(codigo);
-//		List<RegiaoTipoTransporte> regiaoTipoTransporte = repository.findByCodigoRegiao(regiaoDto.toRegiao());
-//		List<RegiaoTipoTransporteDto> regiaoTipoTransporteDto = regiaoTipoTransporte.stream()
-//				.map(obj -> RegiaoTipoTransporteDto.toDto(obj)).collect(Collectors.toList());
-//		return new TiposTransporteDaRegiaoDto(regiaoDto, regiaoTipoTransporteDto);
-//	}
-	
-//	@Transactional
-//	public TiposTransporteDaRegiaoDto listarPorCodigoRegiao(Long codigo) {
-//		RegiaoDto regiaoDto = regiaoService.findById2(codigo);
-//		List<RegiaoTipoTransporte> regiaoTipoTransporte = repository.findByCodigoRegiao(regiaoDto.toRegiao());
-//		List<RegiaoTipoTransporteDto> regiaoTipoTransporteDto = regiaoTipoTransporte.stream()
-//				.map(obj -> RegiaoTipoTransporteDto.toDto(obj)).collect(Collectors.toList());
-//		return new TiposTransporteDaRegiaoDto(regiaoDto, regiaoTipoTransporteDto);
-//	}
-	
-	
 
 	@Transactional
 	public RegiaoTipoTransportePK cadastrar(RegiaoTipoTransporteDto form) {
@@ -68,21 +48,13 @@ public class RegiaoTipoTransporteService {
 		return regiaotipoTransporte.getRegiaoTipoTransportePK();
 	}
 
-//	public RegiaoTipoTransporteDto2 atualizar(Long codigo, @Valid RegiaoTipoTransporteDto2 form) {
-//		RegiaoTipoTransporte regiaoTipoTransporte = repository.findById(codigo)
-//				.orElseThrow(() -> new EntityNotFoundException("Código não localizado" + codigo));
-//		regiaoTipoTransporte.alteraCodigoRegiao(form.getCodigoRegiao());
-//		regiaoTipoTransporte.alteraCodigoTipoTransporte(form.getCodigoTipoTransporte());
-//		repository.save(regiaoTipoTransporte);
-//		return RegiaoTipoTransporteDto2.toDto(regiaoTipoTransporte);
-//	}
-
-//	@Transactional
-//	public RegiaoTipoTransporteDto2 excluir(Long codigo) {
-//		RegiaoTipoTransporte regiaoTipoTransporte = repository.findById(codigo)
-//				.orElseThrow(() -> new EntityNotFoundException("Codigo não localizado " + codigo));
-//		repository.delete(regiaoTipoTransporte);
-//		return RegiaoTipoTransporteDto2.toDto(regiaoTipoTransporte);
-//	}
+	@Transactional
+	public RegiaoTipoTransportePK excluir(Long codigoRegiao, Long codigoTipoTransporte) {
+		Regiao regiao = regiaoService.findById(codigoRegiao).toRegiao();
+		TipoTransporte tipoTransporte = tipoTransporteService.findById(codigoTipoTransporte).toTipoTransporte();
+		RegiaoTipoTransporte regiaotipoTransporte = new RegiaoTipoTransporte(regiao, tipoTransporte);
+		repository.delete(regiaotipoTransporte);
+		return regiaotipoTransporte.getRegiaoTipoTransportePK();
+	}
 
 }

@@ -27,17 +27,14 @@ public class FilialService {
 	}
 	
 	@Transactional(readOnly = true)
-	public FilialDto listarPoCnpj(String cnpj) {
+	public FilialDto findById(String cnpj) {
 		Filial filial = filialRepository.findById(cnpj).orElseThrow(
 				() -> new EntityNotFoundException("Cnpj inexistente " + cnpj));
-//		FilialDto filialDto = new FilialDto(filial);
-//		return filialDto;
 		return FilialDto.toFilialDto(filial);
 	}
 	
 	@Transactional
 	public String cadastrar(FilialDto form) {
-//		Filial filial = new Filial(form.getCnpj(), form.getDescricao());
 		Filial filial = form.toFilial();
 		filialRepository.save(filial);
 		return filial.getCnpj();		

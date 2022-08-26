@@ -27,7 +27,7 @@ public class CategoriaService {
 	}
 	
 	@Transactional(readOnly = true)
-	public CategoriaDto listarPorCodigo(Long codigo) {
+	public CategoriaDto findById(Long codigo) {
 		Categoria categoria = categoriaRepository.findById(codigo).orElseThrow(
 				() -> new EntityNotFoundException("Código inexistente " + codigo));
 		return CategoriaDto.converter(categoria);

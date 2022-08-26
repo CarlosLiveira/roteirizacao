@@ -35,7 +35,7 @@ public class CategoriaController {
 	
 	@GetMapping(path = "/{codigo}")
 	public ResponseEntity<CategoriaDto> listarPorCodigo(@PathVariable(name = "codigo") Long codigo){
-		return ResponseEntity.ok().body(categoriaService.listarPorCodigo(codigo));
+		return ResponseEntity.ok().body(categoriaService.findById(codigo));
 	}
 	
 	@PostMapping

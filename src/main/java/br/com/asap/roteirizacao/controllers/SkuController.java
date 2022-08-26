@@ -35,7 +35,7 @@ public class SkuController {
 	
 	@GetMapping(path = "/{codigo}")
 	public ResponseEntity<SkuDto> listarPorCodigo(@PathVariable(name = "codigo") Long codigo){
-		return ResponseEntity.ok().body(skuService.listarPorCodigo(codigo));
+		return ResponseEntity.ok().body(skuService.findById(codigo));
 	}
 	
 	@PostMapping
