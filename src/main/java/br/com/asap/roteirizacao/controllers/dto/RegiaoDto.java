@@ -79,5 +79,5 @@ public class RegiaoDto implements Serializable {
 		Regiao entity = new Regiao(this.codigo, this.descricao, this.status);
 		return entity;
 	}
-
+	
 }

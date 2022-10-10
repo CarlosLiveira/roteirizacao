@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class RoteirizacaoApplication {
 	
 	public static void main(String[] args) {
-		SpringApplication.run(RoteirizacaoApplication.class, args);		
+		SpringApplication.run(RoteirizacaoApplication.class, args);
 	}
 
 }

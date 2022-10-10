@@ -6,46 +6,41 @@ import java.util.Objects;
 import br.com.asap.roteirizacao.entities.TipoTransporte;
 
 public class TipoTransporteDto implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	private Long codigo;
 	private String descricao;
-	//private List<Regiao> regioes;
-	
+
 	public TipoTransporteDto() {
 	}
-
 
 	public TipoTransporteDto(Long codigo, String descricao) {
 		this.codigo = codigo;
 		this.descricao = descricao;
-//		this.regioes = regioes;
 	}
-
 
 	public TipoTransporteDto(TipoTransporte tipoTransporte) {
 		codigo = tipoTransporte.getCodigo();
 		descricao = tipoTransporte.getDescricao();
-		//regioes = tipoTransporte.getRegioes();
 	}
-	
+
 	public Long getCodigo() {
 		return codigo;
 	}
-	
+
 	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
-	
+
 	public String getDescricao() {
 		return descricao;
 	}
-	
+
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(codigo);
@@ -72,5 +67,5 @@ public class TipoTransporteDto implements Serializable {
 		TipoTransporte tipoTransporte = new TipoTransporte(this.codigo, this.descricao);
 		return tipoTransporte;
 	}
-	
+
 }

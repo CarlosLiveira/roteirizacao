@@ -36,6 +36,12 @@ public class RegiaoSkuPk implements Serializable {
 		codigo = regiao.getCodigo();
 	}
 
+
+	public RegiaoSkuPk(RegiaoFaixasCep regiaoFaixasCep, RegiaoSkuPk regiaoSku) {
+		regiao = regiaoFaixasCep.getRegiao();
+		sku = regiaoSku.getSku();
+	}
+
 	public Regiao getRegiao() {
 		return regiao;
 	}

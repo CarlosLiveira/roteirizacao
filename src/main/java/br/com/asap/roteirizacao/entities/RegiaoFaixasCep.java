@@ -14,8 +14,8 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "tbFaixasCep")
-public class FaixasCep implements Serializable {
+@Table(name = "tbRegiaoFaixasCep")
+public class RegiaoFaixasCep implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
@@ -24,28 +24,46 @@ public class FaixasCep implements Serializable {
 	private Long codigo;
 	private Long cepInicial;
 	private Long cepFinal;
-	
+
 	@JsonIgnore
 	@ManyToOne
-	@JoinColumn(name = "codigoRegiao")
-	private Regiao codigoRegiao;
+	@JoinColumn(name = "regiao")
+	private Regiao regiao;
 
-	public FaixasCep() {
+	public RegiaoFaixasCep() {
 	}
-	
-	public FaixasCep(Long codigo, Long cepInicial, Long cepFinal, Regiao codigoRegiao) {
+
+	public RegiaoFaixasCep(Long codigo, Long cepInicial, Long cepFinal, Regiao regiao) {
 		this.codigo = codigo;
-		this.codigoRegiao = codigoRegiao;
 		this.cepInicial = cepInicial;
 		this.cepFinal = cepFinal;
+		this.regiao = regiao;
 	}
 	
-	public Regiao getCodigoRegiao() {
-		return codigoRegiao;
+	public RegiaoFaixasCep(Long cepInicial, Long cepFinal, Regiao regiao) {
+		this.cepInicial = cepInicial;
+		this.cepFinal = cepFinal;
+		this.regiao = regiao;
 	}
 
-	public void setCodigoRegiao(Regiao codigoRegiao) {
-		this.codigoRegiao = codigoRegiao;
+	public RegiaoFaixasCep(Regiao regiao, RegiaoFaixasCep regiaoFaixasCep) {
+		this.regiao = regiao;
+		this.codigo = regiaoFaixasCep.getCodigo();
+		this.cepInicial = regiaoFaixasCep.getCepInicial();
+		this.cepFinal = regiaoFaixasCep.getCepFinal();
+	}
+
+	//************ATENÇÃO*********************
+	public RegiaoFaixasCep(Long cep) {
+		this.codigo = cep;
+	}
+
+	public Regiao getRegiao() {
+		return regiao;
+	}
+
+	public void setRegiao(Regiao regiao) {
+		this.regiao = regiao;
 	}
 
 	public Long getCepInicial() {
@@ -85,8 +103,8 @@ public class FaixasCep implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		FaixasCep other = (FaixasCep) obj;
+		RegiaoFaixasCep other = (RegiaoFaixasCep) obj;
 		return Objects.equals(codigo, other.codigo);
-	}	
-	
+	}
+
 }

@@ -28,7 +28,7 @@ public class RegiaoService {
 	@Transactional(readOnly = true)
 	public RegiaoDto findById(Long codigo) {
 		Regiao regiao = regiaoRepository.findById(codigo)
-				.orElseThrow(() -> new EntityNotFoundException("Região não localizada " + codigo));
+				.orElseThrow(() -> new EntityNotFoundException("Região não localizada: " + codigo));
 		return RegiaoDto.toDto(regiao);
 	}
 

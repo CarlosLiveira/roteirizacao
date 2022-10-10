@@ -40,7 +40,7 @@ public class FilialController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<FilialDto> cadastrar(@RequestBody @Valid FilialDto form, UriComponentsBuilder uriBuilder){
+	public ResponseEntity<FilialDto> cadastrar(@RequestBody FilialDto form, UriComponentsBuilder uriBuilder){
 		String cnpj = filialService.cadastrar(form);
 		
 		URI uri = uriBuilder.path("/filial/{cnpj}").buildAndExpand(cnpj).toUri();

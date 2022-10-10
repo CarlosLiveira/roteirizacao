@@ -32,8 +32,8 @@ public class Regiao implements Serializable {
 	private RegiaoStatus status;
 
 	@OneToMany
-	@JoinColumn(name = "codigoRegiao")
-	private List<FaixasCep> faixasCep = new ArrayList<>();
+	@JoinColumn(name = "regiao")
+	private List<RegiaoFaixasCep> regiaoFaixasCep = new ArrayList<>();
 
 	@OneToMany
 	@JoinColumn(name = "tipoTransporte")
@@ -54,13 +54,13 @@ public class Regiao implements Serializable {
 	public Regiao() {
 	}
 
-	public Regiao(Long codigo, String descricao, RegiaoStatus status, List<FaixasCep> faixasCep,
+	public Regiao(Long codigo, String descricao, RegiaoStatus status, List<RegiaoFaixasCep> regiaoFaixasCep,
 			List<RegiaoTipoTransporte> regioesTiposTransporte, List<RegiaoCategoria> categorias, List<RegiaoSku> skus,
 			List<RegiaoFilial> filiais) {
 		this.codigo = codigo;
 		this.descricao = descricao;
 		this.status = status;
-		this.faixasCep = faixasCep;
+		this.regiaoFaixasCep = regiaoFaixasCep;
 		this.regioesTiposTransporte = regioesTiposTransporte;
 		this.categorias = categorias;
 		this.skus = skus;
@@ -97,12 +97,12 @@ public class Regiao implements Serializable {
 		this.status = status;
 	}
 
-	public List<FaixasCep> getFaixasCep() {
-		return faixasCep;
+	public List<RegiaoFaixasCep> getFaixasCep() {
+		return regiaoFaixasCep;
 	}
 
-	public void setFaixasCep(List<FaixasCep> faixasCep) {
-		this.faixasCep = faixasCep;
+	public void setFaixasCep(List<RegiaoFaixasCep> regiaoFaixasCep) {
+		this.regiaoFaixasCep = regiaoFaixasCep;
 	}
 
 	public List<RegiaoTipoTransporte> getRegioesTiposTransporte() {

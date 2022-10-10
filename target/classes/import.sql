@@ -27,12 +27,21 @@ INSERT INTO tb_regiao(codigo, descricao, status) VALUES(2, 'Zona Norte São Paul
 INSERT INTO tb_regiao(codigo, descricao, status) VALUES(3, 'Zona Leste São Paulo', 'ATIVO');
 INSERT INTO tb_regiao(codigo, descricao, status) VALUES(4, 'Zona Leste São Paulo', 'ATIVO');
 
-INSERT INTO tb_faixas_cep(codigo, codigo_Regiao, cep_Inicial, cep_Final) VALUES (1, 1, 01000, 01599);
-INSERT INTO tb_faixas_cep(codigo, codigo_Regiao, cep_Inicial, cep_Final) VALUES (2, 1, 01600, 01999);
-INSERT INTO tb_faixas_cep(codigo, codigo_Regiao, cep_Inicial, cep_Final) VALUES (3, 2, 02000, 02999);
-INSERT INTO tb_faixas_cep(codigo, codigo_Regiao, cep_Inicial, cep_Final) VALUES (4, 3, 03000, 03999);
-INSERT INTO tb_faixas_cep(codigo, codigo_Regiao, cep_Inicial, cep_Final) VALUES (5, 4, 08000, 08499);
+INSERT INTO tb_regiao_faixas_cep(regiao, codigo, cep_Inicial, cep_Final) VALUES (1, 1, 01000, 01599);
+INSERT INTO tb_regiao_faixas_cep(regiao, codigo, cep_Inicial, cep_Final) VALUES (1, 2, 01600, 01999);
+INSERT INTO tb_regiao_faixas_cep(regiao, codigo, cep_Inicial, cep_Final) VALUES (2, 3 ,02000, 02999);
+INSERT INTO tb_regiao_faixas_cep(regiao, codigo, cep_Inicial, cep_Final) VALUES (3, 4, 03000, 03999);
+INSERT INTO tb_regiao_faixas_cep(regiao, codigo, cep_Inicial, cep_Final) VALUES (4, 5, 08000, 08499);
+INSERT INTO tb_regiao_faixas_cep(regiao, codigo, cep_Inicial, cep_Final) VALUES (3, 6, 01000, 01599);
 
 INSERT INTO tb_regiao_categoria(codigo_regiao, codigo_categoria) VALUES(1, 1);
 INSERT INTO tb_regiao_categoria(codigo_regiao, codigo_categoria) VALUES(2, 2);
 INSERT INTO tb_regiao_categoria(codigo_regiao, codigo_categoria) VALUES(2, 1);
+
+INSERT INTO tb_regiao_sku(regiao, sku) VALUES(1, 1);
+INSERT INTO tb_regiao_sku(regiao, sku) VALUES(1, 3);
+INSERT INTO tb_regiao_sku(regiao, sku) VALUES(2, 5);
+INSERT INTO tb_regiao_sku(regiao, sku) VALUES(3, 2);
+INSERT INTO tb_regiao_sku(regiao, sku) VALUES(4, 4);
+INSERT INTO tb_regiao_sku(regiao, sku) VALUES(4, 6);
+
