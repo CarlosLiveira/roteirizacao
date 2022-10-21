@@ -14,6 +14,7 @@ import br.com.asap.roteirizacao.controllers.dto.RegiaoTipoTransporteDtoOutput;
 import br.com.asap.roteirizacao.entities.Regiao;
 import br.com.asap.roteirizacao.entities.RegiaoTipoTransporte;
 import br.com.asap.roteirizacao.entities.RegiaoTipoTransportePK;
+import br.com.asap.roteirizacao.entities.Sku;
 import br.com.asap.roteirizacao.entities.TipoTransporte;
 import br.com.asap.roteirizacao.repositories.RegiaoTipoTransporteRepository;
 
@@ -21,7 +22,7 @@ import br.com.asap.roteirizacao.repositories.RegiaoTipoTransporteRepository;
 public class RegiaoTipoTransporteService {
 
 	@Autowired
-	private RegiaoTipoTransporteRepository repository;
+	private RegiaoTipoTransporteRepository regiaoTipoTransporteRepository;
 
 	@Autowired
 	private RegiaoService regiaoService;
@@ -32,7 +33,7 @@ public class RegiaoTipoTransporteService {
 	@Transactional
 	public RegiaoTipoTransporteDtoOutput listarPorCodigoRegiao(Long codigo) {
 		RegiaoDto regiaoDto = regiaoService.findById(codigo);
-		List<RegiaoTipoTransporte> regiaoTipoTransporte = repository.findByCodigoRegiao(regiaoDto.toRegiao());
+		List<RegiaoTipoTransporte> regiaoTipoTransporte = regiaoTipoTransporteRepository.findByCodigoRegiao(regiaoDto.toRegiao());
 		List<TipoTransporte> tiposTransporte = regiaoTipoTransporte.stream()
 				.map(obj -> obj.getRegiaoTipoTransportePK().getTipoTransporte()).collect(Collectors.toList());
 		return new RegiaoTipoTransporteDtoOutput(regiaoDto, tiposTransporte);
@@ -44,7 +45,7 @@ public class RegiaoTipoTransporteService {
 		TipoTransporte tipoTransporte = tipoTransporteService.findById(form.getTipoTransporte().getCodigo())
 				.toTipoTransporte();
 		RegiaoTipoTransporte regiaotipoTransporte = new RegiaoTipoTransporte(regiao, tipoTransporte);
-		repository.save(regiaotipoTransporte);
+		regiaoTipoTransporteRepository.save(regiaotipoTransporte);
 		return regiaotipoTransporte.getRegiaoTipoTransportePK();
 	}
 
@@ -53,8 +54,18 @@ public class RegiaoTipoTransporteService {
 		Regiao regiao = regiaoService.findById(codigoRegiao).toRegiao();
 		TipoTransporte tipoTransporte = tipoTransporteService.findById(codigoTipoTransporte).toTipoTransporte();
 		RegiaoTipoTransporte regiaotipoTransporte = new RegiaoTipoTransporte(regiao, tipoTransporte);
-		repository.delete(regiaotipoTransporte);
+		regiaoTipoTransporteRepository.delete(regiaotipoTransporte);
 		return regiaotipoTransporte.getRegiaoTipoTransportePK();
+	}
+	
+	public List<Regiao> regioesQueAtendemOTipoTransporte(List<Regiao>regioesQueAtendemCategoria, Sku sku){
+		List<Regiao> regioesQueAtendemOTipoTransporte =
+		regiaoTipoTransporteRepository.findByRegiaoInAndTipoTransporte(
+				regioesQueAtendemCategoria, sku.getCodigoTipoTransporte())
+		.stream()
+		.map(r -> r.getRegiaoTipoTransportePK().getRegiao())
+		.collect(Collectors.toList());
+		return regioesQueAtendemOTipoTransporte;
 	}
 
 }

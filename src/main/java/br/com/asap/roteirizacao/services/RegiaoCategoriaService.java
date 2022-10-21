@@ -14,6 +14,7 @@ import br.com.asap.roteirizacao.entities.Categoria;
 import br.com.asap.roteirizacao.entities.Regiao;
 import br.com.asap.roteirizacao.entities.RegiaoCategoria;
 import br.com.asap.roteirizacao.entities.RegiaoCategoriaPk;
+import br.com.asap.roteirizacao.entities.Sku;
 import br.com.asap.roteirizacao.repositories.RegiaoCategoriaRepository;
 
 @Service
@@ -54,5 +55,16 @@ public class RegiaoCategoriaService {
 		regiaoCategoriaRepository.delete(regiaoCategoria);
 		return regiaoCategoria.getRegiaoCategoriaPk();
 	}
+	
+	public List<Regiao> metodoRegioesQueAtendemCategoria(Sku sku, List<Regiao> regioesQueAtendeOCep){
+		List<Regiao>regioesQueAtendemCategoria = regiaoCategoriaRepository.
+			findByRegiaoCategoriaPkCategoriaAndRegiaoCategoriaPkRegiaoIn(
+				sku.getCodigoCategoria(), regioesQueAtendeOCep)
+		.stream()
+		.map(r -> r.getRegiaoCategoriaPk().getRegiao())
+		.collect(Collectors.toList());
+		return regioesQueAtendemCategoria;
+	}
+		
 
 }

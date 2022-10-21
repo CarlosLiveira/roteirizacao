@@ -60,5 +60,17 @@ public class RegiaoFilialService {
 		regiaoFilialRepository.delete(regiaoFilial);
 		return regiaoFilial.getRegiaoFilialPk();
 	}
+	
+	public List<Filial> filiaisQueAtendemOCep(List<Regiao>regioesQueAtendeOSku){
+		List<Filial> filiaisQueAtendemOCep =
+			regiaoFilialRepository.findByRegiaoIn(regioesQueAtendeOSku)
+			.stream()
+			.map(r -> r.getRegiaoFilialPk().getFilial())
+			.distinct()
+			.collect(Collectors.toList());
+		return filiaisQueAtendemOCep;
+	}
+	
+	
 
 }

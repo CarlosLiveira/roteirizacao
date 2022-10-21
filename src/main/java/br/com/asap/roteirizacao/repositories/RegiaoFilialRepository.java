@@ -18,5 +18,4 @@ public interface RegiaoFilialRepository extends JpaRepository<RegiaoFilial, Regi
 	@Query("SELECT F FROM RegiaoFilial F WHERE regiaoFilialPk.regiao in (?1)")
 	List<RegiaoFilial> findByRegiaoIn(List<Regiao> regiao);
 	
-
 }

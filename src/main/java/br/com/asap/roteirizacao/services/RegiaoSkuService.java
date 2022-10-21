@@ -54,5 +54,15 @@ public class RegiaoSkuService {
 		regiaoSkuRepository.delete(regiaoSku);
 		return regiaoSku.getRegiaoSkuPk();
 	}
+	
+	
+	public List<Regiao> metodoRegioesQueAtendeOSku(Sku sku, List<Regiao> regioesQueAtendeOCep){
+		List<Regiao> regioesQueAtendeOSku = regiaoSkuRepository.findByRegiaoSkuPkSkuAndRegiaoSkuPkRegiaoIn(
+		sku, regioesQueAtendeOCep)
+		.stream()
+		.map(r -> r.getRegiaoSkuPk().getRegiao())
+		.collect(Collectors.toList());
+		return regioesQueAtendeOSku;
+	}
 
 }

@@ -23,7 +23,7 @@ public class ConsultasController {
 	public ResponseEntity<List<Filial>> findFiliais(
 			@RequestParam(name = "cep", defaultValue = "0") Long cep,
 			@RequestParam(name = "sku", defaultValue = "0") Long codigoSku) {
-		List<Filial> filiais = consultaService.ListarRegiaoAtendeCep(cep, codigoSku);
+		List<Filial> filiais = consultaService.listarRegiaoAtendeCep(cep, codigoSku);
 		return ResponseEntity.ok().body(filiais);
 	}
 

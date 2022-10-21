@@ -45,3 +45,12 @@ INSERT INTO tb_regiao_sku(regiao, sku) VALUES(3, 2);
 INSERT INTO tb_regiao_sku(regiao, sku) VALUES(4, 4);
 INSERT INTO tb_regiao_sku(regiao, sku) VALUES(4, 6);
 
+INSERT INTO tb_regiao_tipo_transporte(regiao, tipo_transporte) VALUES(1, 1);
+INSERT INTO tb_regiao_tipo_transporte(regiao, tipo_transporte) VALUES(1, 2);
+INSERT INTO tb_regiao_tipo_transporte(regiao, tipo_transporte) VALUES(2, 1);
+INSERT INTO tb_regiao_tipo_transporte(regiao, tipo_transporte) VALUES(3, 2);
+
+INSERT INTO tb_regiao_filial(regiao, filial, ordem) VALUES(1, 1, 1);
+INSERT INTO tb_regiao_filial(regiao, filial, ordem) VALUES(2, 2, 2);
+INSERT INTO tb_regiao_filial(regiao, filial, ordem) VALUES(3, 3, 3);
+INSERT INTO tb_regiao_filial(regiao, filial, ordem) VALUES(4, 4, 4);

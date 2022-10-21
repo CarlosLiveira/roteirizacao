@@ -18,7 +18,7 @@ import br.com.asap.roteirizacao.service.exceptions.EntityNotFoundException;
 public class RegiaoFaixasCepService {
 
 	@Autowired
-	private RegiaoFaixasCepRepository repository;
+	private RegiaoFaixasCepRepository regiaoFaixasCepRepository;
 
 	@Autowired
 	private RegiaoService regiaoService;
@@ -26,7 +26,7 @@ public class RegiaoFaixasCepService {
 	@Transactional
 	public RegiaoFaixasCepDtoOutput listarPorCodigoRegiao(Long codigo) {
 		RegiaoDto regiaoDto = regiaoService.findById(codigo);
-		List<RegiaoFaixasCep> regiaoFaixasCep = repository.findByCodigoRegiao(regiaoDto.toRegiao());
+		List<RegiaoFaixasCep> regiaoFaixasCep = regiaoFaixasCepRepository.findByCodigoRegiao(regiaoDto.toRegiao());
 		return new RegiaoFaixasCepDtoOutput(regiaoDto, regiaoFaixasCep);
 	}
 
@@ -34,18 +34,23 @@ public class RegiaoFaixasCepService {
 	public Long cadastrar(RegiaoFaixasCepDto form) {
 		Regiao regiao = regiaoService.findById(form.getRegiao().getCodigo()).toRegiao();
 		RegiaoFaixasCep regiaoFaixasCep = new RegiaoFaixasCep(form.getCepInicial(), form.getCepFinal(), regiao);
-		repository.save(regiaoFaixasCep);
+		regiaoFaixasCepRepository.save(regiaoFaixasCep);
 		return regiaoFaixasCep.getCodigo();
 	}
 
 	@Transactional
 	public RegiaoFaixasCepDto excluir(Long codigoRegiao, Long codigoFaixaCep) {
 		Regiao regiao = regiaoService.findById(codigoRegiao).toRegiao();
-		RegiaoFaixasCep regiaoFaixasCep = repository.findById(codigoFaixaCep)
+		RegiaoFaixasCep regiaoFaixasCep = regiaoFaixasCepRepository.findById(codigoFaixaCep)
 				.orElseThrow(() -> new EntityNotFoundException("Faixa de cep não localizada: " + codigoFaixaCep));
 		RegiaoFaixasCep faixasCep = new RegiaoFaixasCep(regiao, regiaoFaixasCep);
-		repository.delete(faixasCep);
+		regiaoFaixasCepRepository.delete(faixasCep);
 		return new RegiaoFaixasCepDto(faixasCep);
+	}
+	
+	public List<Regiao> regioesQueAtendeOCep (Long cep) {
+		List<Regiao> regioesQueAtendeOCep = regiaoFaixasCepRepository.findByCep(cep);
+		return regioesQueAtendeOCep;
 	}
 	
 }
